@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solid Glass — 远看坚实，近看是玻璃</title>
+    <meta
+      name="description"
+      content="Solid Glass 是一份为 AI 应用而生的 shadcn/ui 主题：站在扁平设计与液态玻璃之间，只让轮廓透出来。12 个组件、1 份样式表、13 项注册表。"
+    />
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      try {
+        var asked = new URLSearchParams(location.search).get("theme")
+        var saved = asked || localStorage.getItem("sg-theme")
+        var dark = saved ? saved === "dark" : true
+        document.documentElement.classList.toggle("dark", dark)
+        document.documentElement.style.colorScheme = dark ? "dark" : "light"
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
