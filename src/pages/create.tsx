@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Slider, Switch } from "@/components/ui/switch"
 import { Tag } from "@/components/ui/tag"
+import { usePageMeta } from "@/lib/use-page-meta"
 import { useThemeMode } from "@/lib/use-theme"
 
 type Tone = "neutral" | "cool" | "warm"
@@ -95,6 +96,7 @@ function Control({
 }
 
 export function Create() {
+  usePageMeta("创建 — Solid Glass", "把厚度、圆角、边缘、模糊、色调摊开，实时预览并复制生成的 CSS。")
   const theme = useThemeMode()
   const base = bases[theme]
 
@@ -105,6 +107,16 @@ export function Create() {
   const [tone, setTone] = React.useState<Tone>("neutral")
   const [chart, setChart] = React.useState<Chart>("grey")
   const [dense, setDense] = React.useState(true)
+
+  function reset() {
+    setThickness(1)
+    setRadius(14)
+    setEdge(1)
+    setBlur(26)
+    setTone("neutral")
+    setChart("grey")
+    setDense(true)
+  }
 
   const hue = toneHue[tone]
   const bg = `oklch(${base.background[0]} ${round(base.background[1] + hue.chroma, 3)} ${hue.background === 0 ? base.background[2] : hue.background})`
@@ -117,6 +129,7 @@ export function Create() {
     "--card": pane(base.card, hue.pane),
     "--popover": pane(base.popover, hue.pane),
     "--radius": `${radius}px`,
+    "--radius-control": `${round(radius * 0.8, 1)}px`,
     "--glass-blur": `blur(${blur}px)`,
     "--glass-rim": `oklch(1 0 0 / ${round(base.rim * edge, 1)}%)`,
     "--glass-inner": `oklch(1 0 0 / ${round(base.inner * edge, 1)}%)`,
@@ -137,8 +150,9 @@ export function Create() {
   --card: ${values["--card"]};
   --popover: ${values["--popover"]};
 
-  /* 圆角与模糊 */
+  /* 圆角与模糊：控件比面板小一档 */
   --radius: ${radius}px;
+  --radius-control: ${round(radius * 0.8, 1)}px;
   --glass-blur: blur(${blur}px);
 
   /* 边缘：rim / inner / edge / shade 同乘一个系数 */
@@ -176,6 +190,16 @@ export function Create() {
 
       <div className="mt-6 grid gap-2 lg:grid-cols-[300px_minmax(0,1fr)]">
         <div id="controls" className="scroll-mt-24">
+          <div className="mb-2 flex items-center justify-between px-1">
+            <span className="sg-eyebrow">参数</span>
+            <button
+              type="button"
+              onClick={reset}
+              className="rounded-sm px-1.5 py-0.5 text-[11px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              重置
+            </button>
+          </div>
           <div className="glass-panel rounded-lg px-4 py-1.5">
             <Control label="厚度" value={`×${thickness.toFixed(2)}`} hint="panel、card、popover 的不透明度同乘这个系数。">
               <Slider value={thickness} onValueChange={setThickness} min={0.5} max={1.6} step={0.05} />
@@ -191,7 +215,7 @@ export function Create() {
             </Control>
 
             <Control label="色调" value={toneOptions.find((item) => item.id === tone)!.label}>
-              <div className="glass-control inline-flex w-full gap-0.5 rounded-lg p-[3px]">
+              <div className="inline-flex w-full gap-0.5 rounded-lg bg-muted p-[3px]">
                 {toneOptions.map((option) => (
                   <button
                     key={option.id}
@@ -200,9 +224,7 @@ export function Create() {
                     onClick={() => setTone(option.id)}
                     className={cn(
                       "h-7 flex-1 rounded-md text-[11.5px] transition-colors",
-                      tone === option.id
-                        ? "glass-control text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                      tone === option.id ? "glass-control text-foreground" : "text-muted-foreground hover:text-foreground"
                     )}
                   >
                     {option.label}
@@ -212,7 +234,7 @@ export function Create() {
             </Control>
 
             <Control label="图表色" value={chartOptions.find((item) => item.id === chart)!.label}>
-              <div className="glass-control inline-flex w-full gap-0.5 rounded-lg p-[3px]">
+              <div className="inline-flex w-full gap-0.5 rounded-lg bg-muted p-[3px]">
                 {chartOptions.map((option) => (
                   <button
                     key={option.id}
@@ -221,9 +243,7 @@ export function Create() {
                     onClick={() => setChart(option.id)}
                     className={cn(
                       "h-7 flex-1 rounded-md text-[11.5px] transition-colors",
-                      chart === option.id
-                        ? "glass-control text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                      chart === option.id ? "glass-control text-foreground" : "text-muted-foreground hover:text-foreground"
                     )}
                   >
                     {option.label}
@@ -250,11 +270,11 @@ export function Create() {
 
         <div id="preview" className="scroll-mt-24">
           <div
-            className="sg-compare-stage grid min-h-[360px] place-items-center p-5 sm:p-8" data-quiet="true"
+            className="sg-stage sg-grid-bg relative grid min-h-[340px] place-items-center overflow-hidden rounded-lg p-5 shadow-[inset_0_0_0_1px_var(--border)] sm:p-8"
             style={vars}
             data-density={dense ? "dense" : "roomy"}
           >
-            <div className="w-full max-w-[430px]">
+            <div className="w-full max-w-[440px]">
               <div className="bg-card rounded-xl p-4" style={{ borderRadius: `calc(${radius}px * 1.05)` }}>
                 <div className="flex items-center gap-2">
                   <span className="size-1.5 rounded-full bg-[var(--brand)]" />

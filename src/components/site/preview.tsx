@@ -75,7 +75,7 @@ function Example({
   const stage = (
     <div
       className={cn(
-        "sg-stage relative flex min-h-[188px] w-full p-6 sm:p-8",
+        "sg-stage relative flex min-h-[148px] w-full p-6 sm:min-h-[188px] sm:p-8",
         align === "center" && "items-center justify-center",
         align === "start" && "items-start justify-start",
         align === "stretch" && "items-stretch",
@@ -90,7 +90,7 @@ function Example({
     <div className="flex h-8 items-center justify-between gap-2 border-b border-border/70 px-2.5">
       <span className="sg-mono text-[9.5px] tracking-[0.12em] text-muted-foreground uppercase">{label}</span>
       {code && (
-        <TabsList className="h-6 bg-transparent p-0" variant="line">
+        <TabsList className="h-6 bg-transparent p-0" variant="line" aria-label="预览与代码">
           <TabsTrigger value="preview" className="h-6 px-1.5 text-[10.5px]">
             预览
           </TabsTrigger>

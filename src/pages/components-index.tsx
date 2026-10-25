@@ -3,11 +3,14 @@ import { Link } from "react-router"
 import { cn } from "@/lib/utils"
 import { DocsShell } from "@/components/site/docs-shell"
 import { previews } from "@/demos/previews"
+import { usePageMeta } from "@/lib/use-page-meta"
 import { registry } from "@/data/registry"
 
 const toc = [{ id: "grid", label: "全部组件" }]
 
 export function ComponentsIndex() {
+  usePageMeta("组件 — Solid Glass", "12 个为智能体工作而做的组件：状态、步骤、diff、提问与上下文。")
+
   return (
     <DocsShell toc={toc} wide>
       <div className="flex flex-col gap-2 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
@@ -27,7 +30,7 @@ export function ComponentsIndex() {
             to={`/components/${item.slug}`}
             className="group glass-panel flex flex-col overflow-hidden rounded-lg transition-colors hover:bg-[var(--card)]"
           >
-            <div className="sg-stage pointer-events-none flex h-[172px] items-center justify-center overflow-hidden p-4">
+            <div className="sg-stage pointer-events-none flex h-[172px] items-center justify-center overflow-hidden p-4" inert>
               <div className="flex max-h-full w-full items-center justify-center">{previews[item.slug]?.()}</div>
             </div>
             <div className="mt-auto border-t border-border/70 px-3.5 py-2.5">

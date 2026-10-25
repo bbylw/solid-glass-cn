@@ -103,6 +103,13 @@ function DocsShell({
         </aside>
 
         <main className="min-w-0 py-8">
+          <details className="glass-panel mb-2 rounded-md px-3 py-2 lg:hidden">
+            <summary className="cursor-pointer text-[12px] text-muted-foreground select-none">文档导航</summary>
+            <div className="mt-3 pb-1">
+              <Sidebar />
+            </div>
+          </details>
+
           {toc.length > 0 && (
             <details className="glass-panel mb-6 rounded-md px-3 py-2 xl:hidden">
               <summary className="cursor-pointer text-[12px] text-muted-foreground select-none">本页目录</summary>

@@ -22,8 +22,20 @@ const patch = `@@ -12,4 +12,5 @@
  }`
 
 const steps: Step[] = [
-  { id: "1", label: "读取 solid-glass.css", status: "done" },
-  { id: "2", label: "搜索 --glass-edge", status: "done" },
+  {
+    id: "1",
+    label: "读取 solid-glass.css",
+    status: "done",
+    detail: "src/styles/solid-glass.css",
+    output: "1358 行 · 55.8 KB",
+  },
+  {
+    id: "2",
+    label: "搜索 --glass-edge",
+    status: "done",
+    detail: "grep -n --glass-edge src/styles",
+    output: "6 处匹配 · 3 个文件",
+  },
   { id: "3", label: "修改 card 的边缘", status: "running", patch },
 ]
 
@@ -37,6 +49,7 @@ const sessions = ["玻璃的边缘", "给面板加厚", "浅色模式的边框",
 function AgentWorkspace({ className, compact = false }: { className?: string; compact?: boolean }) {
   const [value, setValue] = React.useState("再深一点呢？")
   const [since] = React.useState(() => Date.now() - 12000)
+  const [active, setActive] = React.useState(0)
 
   return (
     <div
@@ -55,7 +68,12 @@ function AgentWorkspace({ className, compact = false }: { className?: string; co
           </Button>
         </div>
         {sessions.map((session, index) => (
-          <PanelRow key={session} chosen={index === 0} className="justify-between">
+          <PanelRow
+            key={session}
+            chosen={index === active}
+            onClick={() => setActive(index)}
+            className="justify-between"
+          >
             {session}
           </PanelRow>
         ))}
@@ -68,7 +86,7 @@ function AgentWorkspace({ className, compact = false }: { className?: string; co
 
       <div className="flex min-w-0 flex-col gap-2.5 p-3 sm:p-4">
         <div className="flex items-center gap-2">
-          <span className="text-[12px] text-muted-foreground">玻璃的边缘</span>
+          <span className="text-[12px] text-muted-foreground">{sessions[active]}</span>
           <span className="sg-mono text-[9px] tracking-[0.08em] text-muted-foreground/60">3 轮</span>
           <div className="ml-auto flex items-center gap-2">
             <span className="hidden text-[10.5px] text-muted-foreground sm:block">86K / 128K</span>

@@ -28,12 +28,15 @@ function CodeBlock({
   filename,
   className,
   copyable = true,
+  wrap = false,
 }: {
   code: string
   language?: CodeLanguage
   filename?: string
   className?: string
   copyable?: boolean
+  /** Commands are short and worth reading whole: let them run onto a second line. */
+  wrap?: boolean
 }) {
   const [copied, setCopied] = React.useState(false)
   const trimmed = code.replace(/\n+$/, "")
@@ -82,7 +85,7 @@ function CodeBlock({
           </Button>
         )}
       </div>
-      <div className="md-code sg-code">
+      <div className={cn("md-code sg-code", wrap && "sg-code-wrap")}>
         <code dangerouslySetInnerHTML={{ __html: html }} />
       </div>
     </div>
@@ -96,6 +99,7 @@ function InstallLine({ name, className }: { name: string; className?: string }) 
       className={className}
       language="bash"
       filename="终端"
+      wrap
       code={`bunx shadcn@latest add deeplethe/solid-glass/${name}`}
     />
   )

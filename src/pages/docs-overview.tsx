@@ -3,6 +3,7 @@ import { Link } from "react-router"
 import { cn } from "@/lib/utils"
 import { DocsShell } from "@/components/site/docs-shell"
 import { buttonVariants } from "@/components/ui/button"
+import { usePageMeta } from "@/lib/use-page-meta"
 import { registry } from "@/data/registry"
 
 const toc = [
@@ -21,6 +22,8 @@ const rules = [
 ]
 
 export function DocsOverview() {
+  usePageMeta("概览 — Solid Glass 文档", "Solid Glass 是什么，它如何生效，以及四条让材质保持一致的规则。")
+
   return (
     <DocsShell toc={toc}>
       <div className="sg-prose">
@@ -46,7 +49,7 @@ export function DocsOverview() {
             to="/components"
             className={cn(buttonVariants({ variant: "ghost", size: "default" }), "h-9 px-4 text-[13px]")}
           >
-            13 项注册表
+            12 个组件
           </Link>
         </div>
 

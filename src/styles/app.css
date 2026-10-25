@@ -176,6 +176,11 @@
     padding: 14px 16px 16px;
   }
 
+  .sg-code-wrap code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
   /* Reveal on scroll: one orchestrated entrance, not scattered effects. */
   .sg-reveal {
     opacity: 0;
@@ -271,11 +276,11 @@
   }
 
   .sg-compare-stage[data-quiet="true"]::before {
-    background: color-mix(in oklch, var(--brand) 20%, transparent);
+    background: color-mix(in oklch, var(--brand) 13%, transparent);
   }
 
   .sg-compare-stage[data-quiet="true"]::after {
-    background: oklch(0.62 0.16 55 / 16%);
+    background: oklch(0.62 0.16 55 / 11%);
   }
 
   .sg-probe {

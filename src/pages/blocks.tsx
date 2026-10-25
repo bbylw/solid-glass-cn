@@ -7,6 +7,7 @@ import { Reveal } from "@/components/site/preview"
 import { AgentWorkspace } from "@/blocks/agent-workspace"
 import { buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { usePageMeta } from "@/lib/use-page-meta"
 
 const toc = [
   { id: "what", label: "这是什么" },
@@ -16,6 +17,8 @@ const toc = [
 ]
 
 export function Blocks() {
+  usePageMeta("agent-workspace — Solid Glass 区块", "一个智能体工作的地方：会话、对话流、文件与后台任务，用同一块玻璃拼成一屏。")
+
   return (
     <DocsShell toc={toc}>
       <div className="flex flex-wrap items-center gap-2 text-[11.5px] text-muted-foreground">
@@ -56,7 +59,7 @@ export function Blocks() {
         预览
       </h2>
       <p className="mt-1.5 mb-3 text-[12.5px] text-muted-foreground">
-        可以点：切换会话、展开步骤、在输入框里打字。
+        可以点：展开步骤、在输入框里打字；宽屏下还能切换会话。
       </p>
       <Reveal>
         <AgentWorkspace />

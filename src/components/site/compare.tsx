@@ -49,7 +49,7 @@ function Compare({ className }: { className?: string }) {
   return (
     <div className={cn("grid gap-2 lg:grid-cols-[0.82fr_1.18fr]", className)}>
       <div className="flex flex-col lg:pr-6">
-        <div className="glass-control inline-flex w-fit gap-0.5 rounded-lg p-[3px]" role="group" aria-label="面板形态">
+        <div className="inline-flex w-fit gap-0.5 rounded-lg bg-muted p-[3px]" role="group" aria-label="面板形态">
           {modes.map((item) => (
             <button
               key={item.id}
@@ -59,7 +59,7 @@ function Compare({ className }: { className?: string }) {
               className={cn(
                 "h-7 rounded-md px-3 text-[12px] transition-colors outline-none",
                 mode === item.id
-                  ? "glass-control text-foreground shadow-[inset_0_1px_0_var(--glass-control-rim),0_0_0_1px_var(--glass-edge)]"
+                  ? "glass-control text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >

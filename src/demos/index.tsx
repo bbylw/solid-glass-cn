@@ -406,7 +406,3 @@ export const demos: Record<string, Demo[]> = {
   ],
 }
 
-/** The one shown on the index card. */
-export const previews: Record<string, () => React.ReactNode> = Object.fromEntries(
-  Object.entries(demos).map(([slug, list]) => [slug, list[0].render])
-)

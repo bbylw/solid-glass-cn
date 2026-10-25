@@ -2,8 +2,11 @@ import { Link } from "react-router"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import { usePageMeta } from "@/lib/use-page-meta"
 
 export function NotFound() {
+  usePageMeta("404 — Solid Glass")
+
   return (
     <main className="mx-auto flex w-full max-w-[1360px] flex-col items-start px-5 py-20">
       <p className="sg-eyebrow">404</p>

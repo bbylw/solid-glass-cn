@@ -4,6 +4,7 @@ import { Link } from "react-router"
 import { cn } from "@/lib/utils"
 import { DocsShell } from "@/components/site/docs-shell"
 import { buttonVariants } from "@/components/ui/button"
+import { usePageMeta } from "@/lib/use-page-meta"
 
 const toc = [
   { id: "anatomy", label: "一块面板的剖面" },
@@ -77,6 +78,8 @@ function MaterialSection({
 }
 
 export function Material() {
+  usePageMeta("材质 — Solid Glass 文档", "一块面板由四道边构成：边缘高光、内线、hairline 与落影。这是材质的全部。")
+
   return (
     <DocsShell toc={toc}>
       <div className="sg-prose">

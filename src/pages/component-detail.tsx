@@ -7,11 +7,16 @@ import { Example } from "@/components/site/preview"
 import { Badge } from "@/components/ui/badge"
 import { demos } from "@/demos"
 import { findComponent, registry } from "@/data/registry"
+import { usePageMeta } from "@/lib/use-page-meta"
 import { NotFound } from "@/pages/not-found"
 
 export function ComponentDetail() {
   const { slug } = useParams()
   const item = findComponent(slug)
+  usePageMeta(
+    item ? `${item.title}（${item.name}）— Solid Glass` : "404 — Solid Glass",
+    item?.summary
+  )
 
   if (!item) return <NotFound />
 

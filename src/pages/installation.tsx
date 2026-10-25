@@ -5,6 +5,7 @@ import { CodeBlock } from "@/components/site/code-block"
 import { DocsShell } from "@/components/site/docs-shell"
 import { buttonVariants } from "@/components/ui/button"
 import { registry } from "@/data/registry"
+import { usePageMeta } from "@/lib/use-page-meta"
 
 const toc = [
   { id: "requirements", label: "开始之前" },
@@ -17,6 +18,8 @@ const toc = [
 ]
 
 export function Installation() {
+  usePageMeta("安装 — Solid Glass 文档", "三步把 Solid Glass 加进一个 shadcn/ui 项目：初始化、加入样式表、调整引入顺序。")
+
   return (
     <DocsShell toc={toc}>
       <div className="sg-prose">
@@ -90,17 +93,17 @@ export function Installation() {
             <span className="sg-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">名称</span>
             <span className="sg-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">类型</span>
           </div>
-          <div className="flex items-center gap-2 border-b border-border/70 px-3.5 py-2.5">
-            <span className="sg-mono text-[10.5px] text-foreground/85">solid-glass</span>
+          <div className="flex items-center gap-3 border-b border-border/70 px-3.5 py-2.5">
+            <span className="sg-mono w-[120px] shrink-0 text-[10.5px] text-foreground/85">solid-glass</span>
             <span className="ml-auto text-[11px] text-muted-foreground">样式表</span>
           </div>
           {registry.map((item) => (
             <Link
               key={item.slug}
               to={`/components/${item.slug}`}
-              className="flex items-center gap-2 border-b border-border/70 px-3.5 py-2.5 transition-colors last:border-b-0 hover:bg-[var(--hover-faint)]"
+              className="flex items-center gap-3 border-b border-border/70 px-3.5 py-2.5 transition-colors last:border-b-0 hover:bg-[var(--hover-faint)]"
             >
-              <span className="sg-mono text-[10.5px] text-foreground/85">{item.name}</span>
+              <span className="sg-mono w-[120px] shrink-0 text-[10.5px] text-foreground/85">{item.name}</span>
               <span className="text-[12px] text-foreground/80">{item.title}</span>
               <span className="ml-auto text-[11px] text-muted-foreground">UI</span>
             </Link>

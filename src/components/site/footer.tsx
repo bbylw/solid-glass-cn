@@ -34,7 +34,7 @@ function Footer() {
   return (
     <footer className="border-t border-border/70">
       <div className="mx-auto w-full max-w-[1360px] px-5 py-10">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_repeat(3,0.6fr)]">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_repeat(3,132px)] lg:gap-10">
           <div>
             <Wordmark />
             <p className="mt-3 max-w-[34ch] text-[12px] leading-relaxed text-muted-foreground">

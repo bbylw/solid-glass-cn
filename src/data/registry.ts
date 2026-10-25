@@ -342,6 +342,3 @@ export const componentGroups = ["基础", "状态", "工作"] as const
 export function findComponent(slug: string | undefined) {
   return registry.find((item) => item.slug === slug)
 }
-
-/** 12 components, one stylesheet: the registry's own count. */
-export const registryCount = registry.length + 1

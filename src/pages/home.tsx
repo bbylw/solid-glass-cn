@@ -3,6 +3,7 @@ import * as React from "react"
 import { Link } from "react-router"
 
 import { cn } from "@/lib/utils"
+import { usePageMeta } from "@/lib/use-page-meta"
 import { Compare } from "@/components/site/compare"
 import { CodeBlock } from "@/components/site/code-block"
 import { Reveal } from "@/components/site/preview"
@@ -46,10 +47,10 @@ function HeroPane() {
           </div>
         </header>
 
-        <div className="flex flex-col gap-2.5 p-3">
+        <div className="flex flex-col gap-2 p-3">
           <TurnStatus activity="searching" label="正在读取 solid-glass.css" since={since} tokens={1280} />
           <StepList steps={steps} />
-          <DiffView patch={patch} className="max-h-[102px]" />
+          <DiffView patch={patch} className="max-h-[82px]" />
           <TaskNotice notices={[{ id: "1", title: "后台任务完成 · 3 个文件已更新", status: "completed" }]} />
           <Composer
             value={value}
@@ -92,7 +93,7 @@ function Hero() {
           <h1 className="mt-5 text-[clamp(2.5rem,5.2vw,4.15rem)] leading-[1.06] font-semibold tracking-[-0.03em]">
             远看坚实，
             <br />
-            近看是<span className="text-[var(--brand)]">玻璃</span>。
+            近看是<span className="text-[var(--brand)]">玻璃</span>
           </h1>
 
           <p className="mt-5 max-w-[34em] text-[15px] leading-[1.75] text-muted-foreground">
@@ -108,7 +109,7 @@ function Hero() {
               to="/components"
               className={cn(buttonVariants({ variant: "secondary", size: "default" }), "h-9 px-4 text-[13px]")}
             >
-              看 13 个组件
+              看 12 个组件
             </Link>
             <Link
               to="/create"
@@ -118,7 +119,7 @@ function Hero() {
             </Link>
           </div>
 
-          <dl className="mt-8 flex flex-wrap gap-x-5 gap-y-1 border-t border-border pt-3 pb-1 lg:mt-auto lg:mb-1">
+          <dl className="mt-8 flex flex-wrap gap-x-5 gap-y-1 border-t border-border pt-3 pb-1 lg:mt-auto">
             {[
               { term: "厚度", value: "3" },
               { term: "状态", value: "1" },
@@ -391,10 +392,10 @@ function ComponentsSection() {
 
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5">
           <span className="sg-mono text-[9.5px] tracking-[0.1em] text-muted-foreground uppercase">
-            panel · tag · dot-loader · status-glyph · reasoning · task-notice · +4
+            panel · tag · dot-loader · status-glyph · reasoning · task-notice
           </span>
           <Link to="/components" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "h-8 text-[12px]")}>
-            全部 13 项
+            全部组件
           </Link>
         </div>
       </div>
@@ -417,7 +418,7 @@ function BlocksSection() {
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5">
           <div className="flex flex-wrap items-center gap-2 text-[12px] text-muted-foreground">
             <span className="sg-mono text-[10.5px] text-foreground/80">agent-workspace</span>
-            <span>13 项注册表中的第 13 项 · 整屏界面 · 可直接复制</span>
+            <span>注册表里的整屏区块 · 可直接复制</span>
           </div>
           <Link to="/blocks" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "h-8 text-[12px]")}>
             打开区块
@@ -431,7 +432,7 @@ function BlocksSection() {
 function InstallSection() {
   return (
     <section className="mt-10 border-t border-border">
-      <div className="mx-auto w-full max-w-[1360px] px-5 pb-12">
+      <div className="mx-auto w-full max-w-[1360px] px-5 pb-8">
         <div className="pt-8">
           <SectionHead index="05" kicker="安装" title="一份样式表，别的都不用改">
             它通过 <span className="sg-mono text-[11.5px] text-foreground">data-slot</span>{" "}
@@ -473,6 +474,7 @@ function InstallSection() {
           <CodeBlock
             language="bash"
             filename="终端"
+            wrap
             code={`# 1 · 加入主题
 bunx shadcn@latest add deeplethe/solid-glass/solid-glass
 
@@ -492,6 +494,11 @@ bunx shadcn@latest add deeplethe/solid-glass/panel`}
 }
 
 export function Home() {
+  usePageMeta(
+    "Solid Glass — 远看坚实，近看是玻璃",
+    "Solid Glass 是一份为 AI 应用而生的 shadcn/ui 主题：站在扁平设计与液态玻璃之间，只让轮廓透出来。"
+  )
+
   return (
     <main>
       <Hero />
